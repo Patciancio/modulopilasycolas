@@ -1,0 +1,52 @@
+program pilaEstatica;
+var
+        datos: array[1..10] of integer;
+        cima: integer;
+
+procedure InicializarPila;
+begin
+        cima := 0;
+end;
+
+procedure Apilar(nuevoDato: integer);
+begin
+        cima := cima + 1;
+        datos[cima] := nuevoDato;
+end;
+
+function Desapilar: integer;
+begin
+        Desapilar := datos[cima];
+        cima := cima - 1;
+end;
+
+function CantidadDatos: integer;
+begin
+        CantidadDatos := cima;
+end;
+{ --- Programa de prueba --- }
+
+var
+        n: integer;
+
+begin
+        InicializarPila;
+        WriteLn('Guardando 3 y 2...');
+        Apilar(3);
+        Apilar(2);
+        WriteLn('Los datos eran:');
+        WriteLn( Desapilar );
+        WriteLn( Desapilar );
+
+        WriteLn('Ahora introduce datos, 0 para terminar...');
+        repeat
+                Write('Dato? ');
+                ReadLn( n );
+                if n <> 0 then
+                        Apilar(n);
+        until n = 0;
+
+        WriteLn('Los datos eran:');
+        while CantidadDatos > 0 do
+                WriteLn( Desapilar );
+end.

@@ -1,0 +1,84 @@
+program ColaEstatica;
+
+uses Crt;
+
+type
+        cola = record
+                 elem: array[1..10] of integer;
+                  inicio,final: 1..10;
+               end;
+var
+        c:cola;
+
+
+function vacia(c: cola):boolean;
+begin
+        vacia := (c.final = c.inicio)
+end;
+
+
+function llena(c: cola): boolean;
+begin
+        llena := ((c.final + 1)mod 10) = c.inicio;
+end;
+
+procedure InicializarCola(c: cola);
+begin
+        c.inicio := 1;
+        c.final := 1;
+end;
+
+procedure Insertar(var c: cola; nuevoDato: integer);
+begin
+        if not llena(c) then
+        begin
+                c.final := (c.final + 1)mod 10;
+                c.elem[c.final] := nuevoDato;
+        end;
+end;
+
+function Eliminar(var c: cola): integer;
+begin
+
+        if not vacia(c) then
+        begin
+                Eliminar := c.elem[c.inicio];
+                c.inicio := (c.inicio + 1)mod 10;
+        end;
+end;
+
+{ --- Programa de prueba --- }
+
+
+var
+        n: integer;
+
+begin
+      InicializarCola(c);
+        repeat
+                Write('Agregar numeros: ');
+                ReadLn(n);
+                if n<>0 then
+                        Insertar(c, n);
+
+        until n = 0;
+
+        WriteLn(Eliminar(c));
+        WriteLn(Eliminar(c));
+        Write('Agregar n: ');
+        ReadLn(n);
+        Insertar(c,n);
+        Write('Agregar n: ');
+        ReadLn(n);
+        Insertar(c,n);
+
+
+        while not vacia(c)  do
+                begin
+                        WriteLn(Eliminar(c));
+        end;
+
+        Delay(10500);
+
+
+end.
