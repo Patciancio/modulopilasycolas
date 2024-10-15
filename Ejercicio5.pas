@@ -2,6 +2,9 @@ program ejercicio5;
 
 uses pilaEstatica in 'PilaEstatica.pas', ColaEstatica in 'ColaEstatica.pas';
 
+var p:pila;
+    c:cola;
+
 procedure PasarPilaACola(p: pila; var c:cola);
 
 var
@@ -44,7 +47,8 @@ begin
         begin
                 WriteLn('Agregar numero');
                 read(y);
-                Apilar(p, y);
+                if y <> 0 then
+                        Apilar(p, y);
         end
 end;
 
@@ -66,6 +70,9 @@ procedure MostrarCola(c:cola);
 
 begin
 
+CargarPilaEj(p);
+PasarPilaACola(p, c);
+MostrarCola(c);
 
 end.
 

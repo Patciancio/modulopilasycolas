@@ -4,8 +4,8 @@ interface
 
 type
         cola = record
-                 elem: array[1..10] of integer;
-                  inicio,final: 1..10;
+                 elem: array[0..10] of integer;
+                  inicio,final: 0..10;
                end;
 var
         c:cola;
@@ -32,16 +32,16 @@ end;
 
 procedure InicializarCola(c: cola);
 begin
-        c.inicio := 1;
-        c.final := 1;
+        c.inicio := 0;
+        c.final := 0;
 end;
 
 procedure Insertar(var c: cola; nuevoDato: integer);
 begin
         if not llena(c) then
         begin
-                c.final := (c.final + 1)mod 10;
                 c.elem[c.final] := nuevoDato;
+                c.final := (c.final + 1)mod 10;
         end;
 end;
 
